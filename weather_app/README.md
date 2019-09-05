@@ -2,7 +2,7 @@
 
 A new Flutter project.
 
-![weather_app](/weather_app_ui.png)
+![weather_app](./weather_app_ui.png)
 
 ## Getting Started
 

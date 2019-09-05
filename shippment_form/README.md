@@ -2,7 +2,7 @@
 
 A new Flutter project.
 
-![Shipment form](/flutter_01.png)
+![Shipment form](./flutter_01.png)
 
 ## Getting Started
 
