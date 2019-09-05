@@ -7,32 +7,44 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          elevation: 0.0,
-          backgroundColor: Colors.white,
-          title: Image.asset('assets/images/logo.png'),
-          centerTitle: true,
-          leading: Icon(
-            Icons.menu,
-            color: Colors.black,
-          ),
-          actions: <Widget>[
-            Padding(
-              child: CircleAvatar(
-                radius: 18.0,
-                backgroundImage: AssetImage("assets/images/profile_image.jpeg"),
-              ),
-              padding: EdgeInsets.all(8.0),
-            ),
-            Icon(
-              Icons.arrow_drop_down,
-              color: Colors.black,
-            )
-          ],
+      theme: ThemeData(fontFamily: 'Quicksand'),
+      home: new MyShipmentForm(),
+    );
+  }
+}
+
+class MyShipmentForm extends StatelessWidget {
+  const MyShipmentForm({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: Colors.white,
+        title: Image.asset('assets/images/logo.png'),
+        centerTitle: true,
+        leading: Icon(
+          Icons.menu,
+          color: Colors.black,
         ),
-        body: MyRegistraion(),
+        actions: <Widget>[
+          Padding(
+            child: CircleAvatar(
+              radius: 18.0,
+              backgroundImage: AssetImage("assets/images/profile_image.jpeg"),
+            ),
+            padding: EdgeInsets.all(8.0),
+          ),
+          Icon(
+            Icons.arrow_drop_down,
+            color: Colors.black,
+          )
+        ],
       ),
+      body: MyRegistraion(),
     );
   }
 }
@@ -95,9 +107,9 @@ class MyRegistraionState extends State<MyRegistraion> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       _customSelectField(
-                          'Date Pickup Requested', 'Select Date...', null),
+                          'Date Pickup \nRequested', 'Select Date...', null),
                       _customSelectField(
-                          'Date Pickup Actual', 'Select Date...', null),
+                          'Date Pickup \nActual', 'Select Date...', null),
                     ],
                   ),
                   SizedBox(
@@ -217,16 +229,24 @@ Container _customFormField(text, isRequired, placeholder) {
             ),
           ),
           Flexible(
-            child: Stack(alignment: Alignment(0.95, -1), children: [
-              TextFormField(
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(10), hintText: placeholder),
+            child: TextField(
+              decoration: new InputDecoration(
+                focusColor: const Color(0xffff6771),
+                contentPadding: EdgeInsets.all(15.0),
+                filled: true,
+                fillColor: Colors.white,
+                suffixIcon: Padding(
+                  padding: const EdgeInsets.fromLTRB(15.0, 5.0, 5.0, 0.0),
+                  child: Text(
+                    '*',
+                    style: TextStyle(color: Colors.red, fontSize: 20.0),
+                  ),
+                ),
+                hintText: placeholder,
+                hintStyle: TextStyle(color: Colors.grey[300], fontSize: 20.0),
+                hasFloatingPlaceholder: true,
               ),
-              Text(
-                "*",
-                style: TextStyle(color: Colors.red),
-              )
-            ]),
+            ),
           ),
         ]),
     decoration: BoxDecoration(
@@ -282,7 +302,7 @@ Container _customCheckbox(title, value) {
 Expanded _customSelectField(label, placeholder, selectedval) {
   return Expanded(
     child: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
           child: Text(
@@ -293,11 +313,12 @@ Expanded _customSelectField(label, placeholder, selectedval) {
         ),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 8.0),
+          margin: EdgeInsets.symmetric(horizontal: 8.0),
           decoration: BoxDecoration(
             color: Colors.grey.shade200,
             borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
           ),
-          child: DropdownButton(
+          child: DropdownButtonFormField(
             value: selectedval,
             hint: Text(placeholder),
             items: <String>['LTL', 'Two', 'Free', 'Four']
@@ -328,7 +349,7 @@ Row _formActions() {
           onPressed: () => null,
           child: Text(
             "Back",
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
           ),
           textColor: Colors.blue,
         ),
@@ -338,9 +359,10 @@ Row _formActions() {
           color: Colors.black,
           onPressed: () {},
           textColor: Colors.white,
+          padding: EdgeInsets.symmetric(vertical: 15.0),
           child: Text(
             'Next',
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
           ),
         ),
       ),
