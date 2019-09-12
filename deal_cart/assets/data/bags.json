@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Blue Pouch",
+    "description": "Blue Pouch Hand Bag",
+    "price": "$1299",
+    "colors": ["#00ff00", "#ff0000", "#0000ff"],
+    "category": "bags",
+    "image": "https://source.unsplash.com/500x500/?bags"
+  },
+  {
+    "title": "Red Pouch",
+    "description": "Red Pouch Hand Bag",
+    "price": "$1999",
+    "colors": ["#00ff00", "#ff0000", "#0000ff"],
+    "category": "bags",
+    "image": "https://source.unsplash.com/500x500/?bags"
+  },
+  {
+    "title": "Green Pouch",
+    "description": "Green Pouch Hand Bag",
+    "price": "$1299",
+    "colors": ["#00ff00", "#ff0000", "#0000ff"],
+    "category": "bags",
+    "image": "https://source.unsplash.com/500x500/?bags"
+  },
+  {
+    "title": "HandBag Pouch",
+    "description": "HandBag Pouch Hand Bag",
+    "price": "$1999",
+    "colors": ["#00ff00", "#ff0000", "#0000ff"],
+    "category": "bags",
+    "image": "https://source.unsplash.com/500x500/?bags"
+  }
+]

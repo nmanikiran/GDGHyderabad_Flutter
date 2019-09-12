@@ -70,15 +70,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       todoList = snapshot.data;
-
-                      return TodoList(
-                          todos: todoList,
-                          onTapItem: onTapItem,
-                          onDelete: onDelete);
+                      return todoList.length == 0
+                          ? Text('No todos yet!')
+                          : TodoList(
+                              todos: todoList,
+                              onTapItem: onTapItem,
+                              onDelete: onDelete);
                     }
-                    return todoList.length == 0
-                        ? Text('No todos yet!')
-                        : CircularProgressIndicator();
+                    return CircularProgressIndicator();
                   }),
             )),
       ),

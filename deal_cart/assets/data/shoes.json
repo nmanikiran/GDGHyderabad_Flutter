@@ -1,0 +1,50 @@
+[
+  {
+  "title": "Blue Shoes",
+  "description": "Blue Shoes Hand Shoes",
+  "price": "$1299",
+  "colors": [
+    "#00ff00",
+    "#ff0000",
+    "#0000ff"
+  ],
+  "category": "shoes",
+  "image": "https://source.unsplash.com/500x500/?shoes"
+},
+{
+  "title": "Red Shoes",
+  "description": "Red Shoes Hand Shoes",
+  "price": "$1999",
+  "colors": [
+    "#00ff00",
+    "#ff0000",
+    "#0000ff"
+  ],
+  "category": "shoes",
+  "image": "https://source.unsplash.com/500x500/?shoes"
+},
+{
+  "title": "Green Shoes",
+  "description": "Green Shoes Hand Shoes",
+  "price": "$1299",
+  "colors": [
+    "#00ff00",
+    "#ff0000",
+    "#0000ff"
+  ],
+  "category": "shoes",
+  "image": "https://source.unsplash.com/500x500/?shoes"
+},
+{
+  "title": "HandShoes Shoes",
+  "description": "HandShoes Shoes Hand Shoes",
+  "price": "$1999",
+  "colors": [
+    "#00ff00",
+    "#ff0000",
+    "#0000ff"
+  ],
+  "category": "shoes",
+  "image": "https://source.unsplash.com/500x500/?shoes"
+}
+]
