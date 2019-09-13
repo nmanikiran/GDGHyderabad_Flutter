@@ -112,12 +112,15 @@ class ItemDetailState extends State<ItemDetails> {
     var colors = itemcolors.replaceAll('[', '').replaceAll(']', '').split(",");
     return Row(
       children: List.generate(colors.length, (int i) {
+        var color = colors[i].replaceAll('#', '').trim();
         return Container(
+          decoration: BoxDecoration(
+            color: Color(int.parse('FF' + color, radix: 16)),
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+          ),
           margin: EdgeInsets.all(5.0),
           width: 30.0,
           height: 30.0,
-          color: Color(int.parse('FF' + colors[i].replaceAll('#', '').trim(),
-              radix: 16)),
         );
       }),
     );
@@ -155,7 +158,10 @@ class ItemDetailState extends State<ItemDetails> {
             color: Colors.indigo,
             padding: EdgeInsets.all(12.0),
             onPressed: () => null,
-            child: Text('Add to Cart'),
+            child: Text(
+              'Add to Cart',
+              textScaleFactor: 1.2,
+            ),
           ),
         ),
         SizedBox(
@@ -169,7 +175,10 @@ class ItemDetailState extends State<ItemDetails> {
             ),
             padding: EdgeInsets.all(12.0),
             onPressed: () => null,
-            child: Text('Buy Now'),
+            child: Text(
+              'Buy Now',
+              textScaleFactor: 1.2,
+            ),
           ),
         )
       ],

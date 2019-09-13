@@ -1,3 +1,4 @@
+import 'package:deal_cart/BottomNavBar.dart';
 import 'package:flutter/material.dart';
 
 import './views/account.dart';
@@ -37,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    _pageController = PageController();
+    _pageController = PageController(initialPage: _selectedTabIndex);
     super.initState();
   }
 
@@ -50,81 +51,94 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Text('Popular',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold)),
-            Icon(
-              Icons.arrow_drop_down,
-              color: Colors.black,
+        appBar: AppBar(
+          elevation: 0.0,
+          title: Container(
+            color: Colors.white,
+            child: DropdownButton(
+              onChanged: (value) {},
+              elevation: 0,
+              underline: Container(),
+              items: <DropdownMenuItem>[
+                DropdownMenuItem(
+                  value: 0,
+                  child: Text(
+                    "Popular",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
+                  ),
+                ),
+                DropdownMenuItem(
+                  value: 1,
+                  child: Text(
+                    "Trend",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
+                  ),
+                ),
+              ],
+              value: 0,
+            ),
+          ),
+          backgroundColor: Colors.white,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.shopping_basket,
+                color: Colors.black,
+              ),
+              onPressed: () => null,
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.search,
+                color: Colors.black,
+              ),
+              onPressed: () => null,
             ),
           ],
         ),
-        backgroundColor: Colors.white,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.shopping_basket,
-              color: Colors.black,
+        body: PageView.builder(
+          itemCount: _pageList.length,
+          controller: _pageController,
+          itemBuilder: (BuildContext context, int index) {
+            return _pageList[index];
+          },
+        ),
+        bottomNavigationBar: BottomNavBar(
+          currentIndex: _selectedTabIndex,
+          items: [
+            NavItem(
+              text: "Home",
+              iconData: Icons.home,
+              color: Colors.indigo,
             ),
-            onPressed: () => null,
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.search,
-              color: Colors.black,
+            NavItem(
+              text: "Messages",
+              iconData: Icons.message,
+              color: Colors.pinkAccent,
             ),
-            onPressed: () => null,
-          ),
-        ],
-      ),
-      body: PageView.builder(
-        itemCount: _pageList.length,
-        controller: _pageController,
-        itemBuilder: (BuildContext context, int index) {
-          return _pageList[index];
-        },
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        elevation: 1.0,
-        backgroundColor: Colors.amberAccent,
-        showSelectedLabels: true,
-        currentIndex: _selectedTabIndex,
-        type: BottomNavigationBarType.shifting,
-        onTap: (int index) {
-          setState(() {
-            _selectedTabIndex = index;
-            if (_pageController.hasClients) {
-              _pageController.animateToPage(
-                _selectedTabIndex,
-                duration: const Duration(milliseconds: 400),
-                curve: Curves.easeInOut,
-              );
-            }
-          });
-        },
-        items: [
-          _bottomNavItem(Icons.home, 'Home'),
-          _bottomNavItem(Icons.notifications, 'Messages'),
-          _bottomNavItem(Icons.favorite, 'Wishlist'),
-          _bottomNavItem(Icons.account_circle, 'Account'),
-        ],
-      ),
-    );
-  }
-
-  BottomNavigationBarItem _bottomNavItem(icon, label) {
-    return BottomNavigationBarItem(
-        icon: Icon(icon, color: Colors.black),
-        title: Text(
-          label,
-          style: TextStyle(color: Colors.black),
+            NavItem(
+              text: "Wishlist",
+              iconData: Icons.favorite_border,
+              color: Colors.yellow.shade900,
+            ),
+            NavItem(
+              text: "Account",
+              iconData: Icons.person_outline,
+              color: Colors.teal,
+            ),
+          ],
+          onBarTap: (int index) {
+            setState(() {
+              _selectedTabIndex = index;
+              if (_pageController.hasClients) {
+                _pageController.animateToPage(
+                  _selectedTabIndex,
+                  duration: const Duration(milliseconds: 400),
+                  curve: Curves.easeInOut,
+                );
+              }
+            });
+          },
         ));
   }
 }

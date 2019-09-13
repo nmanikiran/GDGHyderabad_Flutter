@@ -42,13 +42,15 @@ class HomePageState extends State<Home> with TickerProviderStateMixin {
                   isScrollable: true,
                   labelStyle: TextStyle(fontSize: 21.0),
                   controller: _tabController,
-                  labelColor: Colors.black,
-                  indicatorColor: Colors.pink,
+                  labelColor: Colors.indigo,
+                  indicatorWeight: 2,
+                  unselectedLabelColor: Colors.grey,
+                  indicator: UnderlineTabIndicator(),
                   indicatorSize: TabBarIndicatorSize.label,
                   tabs: tabList),
             ),
             Container(
-              height: MediaQuery.of(context).size.height - 200,
+              height: MediaQuery.of(context).size.height - 250,
               child: new TabBarView(
                 controller: _tabController,
                 children: [
