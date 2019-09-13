@@ -5,7 +5,6 @@ import 'package:deal_cart/db/dbHelper.dart';
 
 class ItemDetails extends StatefulWidget {
   final Item item;
-
   const ItemDetails({Key key, this.item}) : super(key: key);
 
   @override
@@ -17,11 +16,11 @@ class ItemDetails extends StatefulWidget {
 class ItemDetailState extends State<ItemDetails> {
   final Item item;
 
-  var db;
+  DealCartDBHelper db;
   bool isFavorite = false;
   ItemDetailState(this.item);
 
-  addToFavorite(item) async {
+  addToFavorite(context, item) async {
     if (isFavorite) {
       await db.removeFavorite(item);
     } else {
@@ -52,7 +51,7 @@ class ItemDetailState extends State<ItemDetails> {
       appBar: AppBar(
         primary: true,
         backgroundColor: Colors.white,
-        leading: GestureDetector(
+        leading: InkWell(
           onTap: () {
             Navigator.of(context).pop();
           },
@@ -77,7 +76,7 @@ class ItemDetailState extends State<ItemDetails> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Image.network(item.image),
+              Hero(tag: item.title, child: Image.network(item.image)),
               SizedBox(height: 10.0),
               Container(
                 padding: EdgeInsets.all(12.0),
@@ -88,7 +87,7 @@ class ItemDetailState extends State<ItemDetails> {
                         style: TextStyle(
                           color: Colors.indigo,
                         )),
-                    SizedBox(height: 10.0),
+                    _renderTitleRow(),
                     Text(
                       item.price,
                       style: TextStyle(
@@ -96,7 +95,6 @@ class ItemDetailState extends State<ItemDetails> {
                           color: Colors.indigo,
                           fontSize: 18.0),
                     ),
-                    _renderTitleRow(),
                     SizedBox(height: 10.0),
                     _renderColors(item.colors),
                     _renderActions(),
@@ -136,7 +134,7 @@ class ItemDetailState extends State<ItemDetails> {
         IconButton(
           icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
           onPressed: () {
-            addToFavorite(item);
+            addToFavorite(context, item);
           },
           color: Colors.indigo,
         )

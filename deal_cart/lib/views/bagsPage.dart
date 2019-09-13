@@ -1,8 +1,7 @@
+import 'package:deal_cart/itemList.dart';
 import 'package:deal_cart/noDataMessage.dart';
 import 'package:flutter/material.dart';
 import 'package:deal_cart/db/item_model.dart';
-import 'package:deal_cart/itemDetails.dart';
-import 'package:deal_cart/itemCard.dart';
 import 'package:deal_cart/fetchData.dart';
 
 class BagsPage extends StatefulWidget {
@@ -24,21 +23,7 @@ class BagsPageState extends State<BagsPage> {
             if (snapshot.hasData) {
               List<Item> bags = snapshot.data;
               return bags.isNotEmpty
-                  ? new GridView.count(
-                      primary: true,
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.95,
-                      children: List.generate(bags.length, (index) {
-                        return GestureDetector(
-                          child: ItemCard(bags[index]),
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    ItemDetails(item: bags[index])));
-                          },
-                        );
-                      }),
-                    )
+                  ? ItemList(items: bags)
                   : NoDataMessage(message: 'No Bags yet!');
             }
             return Center(child: new CircularProgressIndicator());

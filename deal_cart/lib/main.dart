@@ -33,6 +33,19 @@ class _MyHomePageState extends State<MyHomePage> {
     Wishlist(),
     Account(),
   ];
+  PageController _pageController;
+
+  @override
+  void initState() {
+    _pageController = PageController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,15 +84,29 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      body: _pageList[_selectedTabIndex],
+      body: PageView.builder(
+        itemCount: _pageList.length,
+        controller: _pageController,
+        itemBuilder: (BuildContext context, int index) {
+          return _pageList[index];
+        },
+      ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 1.0,
         backgroundColor: Colors.amberAccent,
         showSelectedLabels: true,
         currentIndex: _selectedTabIndex,
+        type: BottomNavigationBarType.shifting,
         onTap: (int index) {
           setState(() {
             _selectedTabIndex = index;
+            if (_pageController.hasClients) {
+              _pageController.animateToPage(
+                _selectedTabIndex,
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeInOut,
+              );
+            }
           });
         },
         items: [

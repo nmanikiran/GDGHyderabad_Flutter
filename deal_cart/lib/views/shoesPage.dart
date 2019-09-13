@@ -1,8 +1,7 @@
+import 'package:deal_cart/itemList.dart';
 import 'package:deal_cart/noDataMessage.dart';
 import 'package:flutter/material.dart';
 import 'package:deal_cart/db/item_model.dart';
-import 'package:deal_cart/itemDetails.dart';
-import 'package:deal_cart/itemCard.dart';
 import 'package:deal_cart/fetchData.dart';
 
 class ShoesPage extends StatefulWidget {
@@ -25,21 +24,7 @@ class ShoesPageState extends State<ShoesPage> {
             if (snapshot.hasData) {
               List<Item> shoes = snapshot.data;
               return shoes.isNotEmpty
-                  ? new GridView.count(
-                      primary: true,
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.95,
-                      children: List.generate(shoes.length, (index) {
-                        return GestureDetector(
-                          child: ItemCard(shoes[index]),
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    ItemDetails(item: shoes[index])));
-                          },
-                        );
-                      }),
-                    )
+                  ? ItemList(items: shoes)
                   : NoDataMessage(message: 'No shoes yet!');
             }
             return Center(child: new CircularProgressIndicator());
