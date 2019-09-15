@@ -55,17 +55,4 @@ class FetchData {
   Future<List> getFavoritesData(BuildContext context) async {
     return dbHelper.getFavorites();
   }
-
-  // saveDataToFavoritesDataBase(var data) {
-  //   Favorites favorite_item = Favorites(
-  //     title: data.title,
-  //     description: data.description,
-  //     price: data.price,
-  //     category: data.category,
-  //     image: data.image,
-  //     colors: data.colors,
-  //   );
-  //   FavoritesDataBaseHelper().saveAttendeesDetails(favorite_item);
-  // }
-
 }

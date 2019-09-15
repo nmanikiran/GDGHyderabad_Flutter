@@ -48,35 +48,36 @@ class ItemDetailState extends State<ItemDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        primary: true,
-        backgroundColor: Colors.white,
-        leading: InkWell(
-          onTap: () {
-            Navigator.of(context).pop();
-          },
-          child: Icon(
-            Icons.chevron_left,
-            color: Colors.black,
-            size: 24.0,
+      body: CustomScrollView(slivers: <Widget>[
+        SliverAppBar(
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.more_horiz,
+                color: Colors.white,
+              ),
+            )
+          ],
+          expandedHeight: MediaQuery.of(context).size.height / 2,
+          pinned: true,
+          flexibleSpace: FlexibleSpaceBar(
+            centerTitle: false,
+            title: Text(item.title),
+            background: Hero(
+              tag: item.id,
+              child: FadeInImage(
+                image: NetworkImage(item.image),
+                height: 300.0,
+                fit: BoxFit.cover,
+                placeholder: NetworkImage('https://placeimg.com/640/480/any'),
+              ),
+            ),
           ),
         ),
-        actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(
-              Icons.more_horiz,
-              color: Colors.black,
-            ),
-          )
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Hero(tag: item.title, child: Image.network(item.image)),
+        SliverList(
+          delegate: SliverChildListDelegate(
+            [
               SizedBox(height: 10.0),
               Container(
                 padding: EdgeInsets.all(12.0),
@@ -98,13 +99,24 @@ class ItemDetailState extends State<ItemDetails> {
                     SizedBox(height: 10.0),
                     _renderColors(item.colors),
                     _renderActions(),
+                    SizedBox(height: 10.0),
+                    Text(
+                      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi placeat non, nam magni repudiandae adipisci praesentium possimus dolorum velit quaerat molestias iste mollitia in optio iure? Officia molestiae, minus optio quam assumenda rerum tempore, doloribus rem vel, temporibus alias sequi. Saepe hic explicabo voluptas! Impedit eaque, explicabo quae at dignissimos veniam nostrum, facilis quos, tenetur recusandae blanditiis! Voluptatibus, unde pariatur? Quos quaerat quidem, corrupti quam ut error neque natus, facere deleniti similique officiis sunt, deserunt iure vero debitis numquam eos facilis perferendis? Earum soluta, animi amet consectetur obcaecati laudantium accusamus a iste deserunt unde nemo natus voluptatibus sapiente quibusdam repellendus.',
+                      style: TextStyle(fontSize: 16.0),
+                    ),
+                    SizedBox(height: 10.0),
+                    Text(
+                      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi placeat non, nam magni repudiandae adipisci praesentium possimus dolorum velit quaerat molestias iste mollitia in optio iure? Officia molestiae, minus optio quam assumenda rerum tempore, doloribus rem vel, temporibus alias sequi. Saepe hic explicabo voluptas! Impedit eaque, explicabo quae at dignissimos veniam nostrum, facilis quos, tenetur recusandae blanditiis! Voluptatibus, unde pariatur? Quos quaerat quidem, corrupti quam ut error neque natus, facere deleniti similique officiis sunt, deserunt iure vero debitis numquam eos facilis perferendis? Earum soluta, animi amet consectetur obcaecati laudantium accusamus a iste deserunt unde nemo natus voluptatibus sapiente quibusdam repellendus.',
+                      style: TextStyle(fontSize: 16.0),
+                    ),
+                    SizedBox(height: 10.0),
                   ],
                 ),
               )
             ],
           ),
         ),
-      ),
+      ]),
     );
   }
 

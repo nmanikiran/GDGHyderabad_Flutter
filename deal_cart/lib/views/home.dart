@@ -1,3 +1,4 @@
+import 'package:deal_cart/DotTabIndicator.dart';
 import 'package:flutter/material.dart';
 import 'package:deal_cart/views/jacketsPage.dart';
 import 'package:deal_cart/views/shoesPage.dart';
@@ -45,7 +46,7 @@ class HomePageState extends State<Home> with TickerProviderStateMixin {
                   labelColor: Colors.indigo,
                   indicatorWeight: 2,
                   unselectedLabelColor: Colors.grey,
-                  indicator: UnderlineTabIndicator(),
+                  indicator: DotTabIndicator(),
                   indicatorSize: TabBarIndicatorSize.label,
                   tabs: tabList),
             ),

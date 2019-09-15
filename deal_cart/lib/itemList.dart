@@ -11,19 +11,20 @@ class ItemList extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
-    return GridView.count(
+    return GridView.builder(
       primary: true,
-      crossAxisCount: isLandscape ? 3 : 2,
-      childAspectRatio: 0.95,
-      children: List.generate(items.length, (index) {
-        return GestureDetector(
+      itemCount: items.length,
+      itemBuilder: (BuildContext context, index) {
+        return InkWell(
           child: ItemCard(items[index]),
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => ItemDetails(item: items[index])));
           },
         );
-      }),
+      },
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: isLandscape ? 3 : 2),
     );
   }
 }
